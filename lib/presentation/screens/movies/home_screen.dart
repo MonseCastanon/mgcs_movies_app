@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mgcs_movies_app/presentation/views/views.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Placeholder(),
+      body: HomeView(),
     );
   }
 }
