@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mgcs_movies_app/config/theme/app_theme.dart';
 import 'package:mgcs_movies_app/presentation/screens/movies/home_screen.dart';
 
-void main() {
+void main() async{
+  await dotenv.load(fileName: '.env');
+
+  print(dotenv.env['MOVIEDB_KEY']);
+  
   runApp(const MainApp());
 }
 
