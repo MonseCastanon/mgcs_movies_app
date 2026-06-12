@@ -55,7 +55,7 @@ class Dates {
 class MovieDb {
   final bool adult;
   final String backdropPath;
-  final List<String> genreIds;
+  final List<int> genreIds;
   final int id;
   final String title;
   final String originalLanguage;
@@ -90,7 +90,7 @@ class MovieDb {
   factory MovieDb.fromJson(Map<String, dynamic> json) => MovieDb(
     adult: json["adult"],
     backdropPath: json["backdrop_path"],
-    genreIds: List<String>.from(json["genre_ids"].map((x) => x)),
+    genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
     id: json["id"],
     title: json["title"],
     originalLanguage: json["original_language"],

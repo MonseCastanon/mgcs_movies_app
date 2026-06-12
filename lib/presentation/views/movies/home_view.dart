@@ -16,7 +16,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
   void initState() {
     super.initState();
 
-    ref.read(nowPlayingMoviesProvider);
+    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
   }
 
   @override
@@ -36,8 +36,17 @@ class _HomeViewState extends ConsumerState<HomeView> {
           delegate: SliverChildBuilderDelegate((context, index) {
             return Column(
               children: [
-                MoviesSlideshow(movies: []),
-                Text('data'),
+                MoviesSlideshow(movies: nowPlayingMovies),
+
+                SizedBox(
+                  height: 20,
+                ),
+
+                MovieHorizontalListview(
+                  movies: nowPlayingMovies,
+                  title: 'En cines',
+                  subtitle: 'A partir de',
+                ),
               ],
             );
           }, childCount: 1),
