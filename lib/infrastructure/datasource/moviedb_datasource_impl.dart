@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:mgcs_movies_app/config/config.dart';
 import 'package:mgcs_movies_app/domain/domain.dart';
 import 'package:mgcs_movies_app/infrastructure/mappers/movie_mapper.dart';
+import 'package:mgcs_movies_app/infrastructure/models/moviedb/movidb_detail.dart';
 import 'package:mgcs_movies_app/infrastructure/models/moviedb/moviedb_response.dart';
 
 class MoviedbDatasourceImpl extends MoviesDatasource{
@@ -30,9 +31,16 @@ class MoviedbDatasourceImpl extends MoviesDatasource{
   }
 
   @override
-  Future<Movie> getMovieById(String id) {
-    // TODO: implement getMovieById
-    throw UnimplementedError();
+  Future<Movie> getMovieById(String id) async {
+    final response = await dio.get('/movie/$id');
+    
+    if(response.statusCode != 200){
+      throw Exception('Movie with id: $id not found');
+    }
+    
+    final detail = MovieDbDetail.fromJson(response.data);
+    final Movie movie = MovieMapper.movieDbDetailToEntity(detail);
+    return movie;
   }
 
   @override
