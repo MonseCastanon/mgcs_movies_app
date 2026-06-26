@@ -2,6 +2,11 @@ import 'package:mgcs_movies_app/domain/domain.dart';
 
 class MovieRepositoryImpl extends MoviesRepository{
 
+  @override
+  Future<List<Actor>> getActorByMovie(String movieId) {
+    return datasource.getActorByMovie(movieId);
+  }
+  
   final MoviesDatasource datasource;
   MovieRepositoryImpl(this.datasource);
 
@@ -43,6 +48,7 @@ class MovieRepositoryImpl extends MoviesRepository{
   @override
   Future<List<Movie>> searchMovie(String query) {
     return datasource.searchMovie(query);
+
   }
-  
+
 }

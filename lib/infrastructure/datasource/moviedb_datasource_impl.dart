@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:mgcs_movies_app/config/config.dart';
 import 'package:mgcs_movies_app/domain/domain.dart';
+import 'package:mgcs_movies_app/infrastructure/infrastucture.dart';
 import 'package:mgcs_movies_app/infrastructure/mappers/movie_mapper.dart';
 import 'package:mgcs_movies_app/infrastructure/models/moviedb/movidb_detail.dart';
 import 'package:mgcs_movies_app/infrastructure/models/moviedb/moviedb_response.dart';
@@ -14,6 +15,17 @@ class MoviedbDatasourceImpl extends MoviesDatasource{
       "language": Enviroments.language
     }
   ));
+  
+  @override
+  Future<List<Actor>> getActorByMovie(String movieId) async {
+    final response = await dio.get('/movie/$movieId/credits');
+
+    final credits = MovieDbCredits.fromJson(response.data);
+
+    List<Actor> actors = credits.cast
+    .map((cast) => ActorMapper.castToEntity(cast)).toList();
+    return actors;
+  }
 
   @override
   Future<List<Movie>> getNowPlaying({int page = 1}) async {
@@ -78,4 +90,5 @@ class MoviedbDatasourceImpl extends MoviesDatasource{
     // TODO: implement searchMovie
     throw UnimplementedError();
   }
+
 }
