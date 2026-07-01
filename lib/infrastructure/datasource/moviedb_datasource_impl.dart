@@ -2,9 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:mgcs_movies_app/config/config.dart';
 import 'package:mgcs_movies_app/domain/domain.dart';
 import 'package:mgcs_movies_app/infrastructure/infrastucture.dart';
-import 'package:mgcs_movies_app/infrastructure/mappers/movie_mapper.dart';
-import 'package:mgcs_movies_app/infrastructure/models/moviedb/movidb_detail.dart';
-import 'package:mgcs_movies_app/infrastructure/models/moviedb/moviedb_response.dart';
 
 class MoviedbDatasourceImpl extends MoviesDatasource{
 
@@ -25,6 +22,21 @@ class MoviedbDatasourceImpl extends MoviesDatasource{
     List<Actor> actors = credits.cast
     .map((cast) => ActorMapper.castToEntity(cast)).toList();
     return actors;
+  }
+
+  @override
+  Future<List<Video>> getYoutubeVideoById(String movieId) async {
+    final response = await dio.get('/movie/$movieId/videos');
+    final videosResponse = MovieDBVideoResponse.fromJson(response.data);
+    final videos = <Video>[];
+
+    for (final v in videosResponse.results) {
+      if(v.site == 'YouTube'){
+        videos.add(VideoMapper.movieDbToEntity(v));
+      }
+    }
+
+    return videos;
   }
 
   @override
@@ -79,11 +91,6 @@ class MoviedbDatasourceImpl extends MoviesDatasource{
     throw UnimplementedError();
   }
 
-  @override
-  Future<List<dynamic>> getYoutubeVideoById(String movieId) {
-    // TODO: implement getYoutubeVideoById
-    throw UnimplementedError();
-  }
 
   @override
   Future<List<Movie>> searchMovie(String query) {

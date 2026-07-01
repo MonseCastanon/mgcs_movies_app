@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mgcs_movies_app/config/config.dart';
 import 'package:mgcs_movies_app/domain/domain.dart';
 import 'package:mgcs_movies_app/presentation/providers/provider.dart';
+import 'package:mgcs_movies_app/presentation/widgets/movies/videos_from_movie.dart';
 import 'package:mgcs_movies_app/presentation/widgets/widgets.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {
@@ -68,11 +69,16 @@ class _MovieDetails extends StatelessWidget {
         MovieGenres(movie: movie),
 
         // Actores de la pelicula
-        ActorByMovie(movieId: movie.id.toString())
+        ActorByMovie(movieId: movie.id.toString()),
 
-        // TODO: Trailers de la pelicula
+        // Trailers de la pelicula
+        VideosFromMovie(movieId: movie.id.toString()),
 
-        // TODO: Peliculas Similares
+        // TODO: Películas Similares
+
+        SizedBox(
+          height: 80,
+        )
       ],
     );
   }

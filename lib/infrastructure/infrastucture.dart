@@ -1,3 +1,5 @@
+export 'package:mgcs_movies_app/infrastructure/mappers/video_mapper.dart';
+export 'package:mgcs_movies_app/infrastructure/models/moviedb/moviedb_videos_response.dart';
 export 'package:mgcs_movies_app/infrastructure/mappers/movie_mapper.dart';
 export 'package:mgcs_movies_app/infrastructure/mappers/actor_mapper.dart';
 export 'package:mgcs_movies_app/infrastructure/models/moviedb/movidb_detail.dart';
