@@ -146,7 +146,7 @@ class BelongsToCollection {
     required this.backdropPath,
   });
 
-  factory BelongsToCollection.fromJson(Map<String, dynamic> json) =>
+  factory BelongsToCollection.fromJson(Map<String, dynamic>? json) =>
       BelongsToCollection(
         id: json != null ? json["id"] : 0,
         name: json != null ? json["name"] : "",

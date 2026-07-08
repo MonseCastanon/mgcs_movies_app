@@ -89,7 +89,7 @@ class _YoutubeVideoPlayerState extends State<_YoutubeVideoPlayer> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(widget.name),
-          YoutubePlayer(controller: _controller)
+          YoutubePlayer(controller: _controller, autoFullScreen: false)
         ],
       ),
     );
